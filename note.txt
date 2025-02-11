@@ -1,0 +1,45 @@
+BEURK : 
+
+for name in STS: 
+    for line in data['ST_Slope']:
+        if name == line: 
+            data[name + "_Slope"] = 1
+        else:
+            data[name + "_Slope"] = 0
+
+
+MIEUX /
+
+STS = ['Up', 'Flat', 'Down']
+for name in STS:
+    data[name + "_ST_Slope"] = (data['ST_Slope'] == name).astype(int)
+data = data.drop('ST_Slope', axis=1)
+
+problemes :
+Écrasement des valeurs : La boucle réassigne les valeurs à chaque itération, ce qui fait que seule la dernière comparaison est conservée.
+
+Inefficacité : L'utilisation d'une double boucle n'est pas nécessaire et peut être très lente sur de grands datasets.
+
+
+et pourtant # Fonction pour vérifier les valeurs non numériques dans chaque colonne
+def check_non_numeric(df):
+    for column in df.columns:
+        # Tentative de conversion en numérique
+        try:
+            pd.to_numeric(df[column])
+            print(f"✅ {column}: Toutes les valeurs sont numériques")
+        except ValueError:
+            # Afficher les valeurs non numériques
+            non_numeric = df[~df[column].apply(lambda x: pd.to_numeric(x, errors='coerce')).notna()][column]
+            print(f"❌ {column}: Contient des valeurs non numériques:")
+            if len(non_numeric) > 0:
+                print(non_numeric.unique())
+
+# Afficher les informations sur les types de données
+print("Types de données actuels:")
+print(data.dtypes)
+print("\nVérification des valeurs non numériques:")
+check_non_numeric(data)
+
+
+..................................
