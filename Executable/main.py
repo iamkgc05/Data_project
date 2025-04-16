@@ -9,6 +9,9 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QFont, QIcon, QPixmap
 
+# Chemin du fichier de données
+DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'heart_disease_by_ceo.csv')
+
 # Importation des modèles (les chemins doivent être correctement configurés)
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 try:
@@ -17,13 +20,6 @@ try:
 except ImportError:
     knn_available = False
     print("Module KNN non disponible")
-
-try:
-    from DT import realiser_dt
-    dt_available = True
-except ImportError:
-    dt_available = False
-    print("Module DT non disponible")
 
 try:
     from RF import realiser_rf
@@ -368,13 +364,6 @@ class CardioPredictor(QMainWindow):
                     results["K-Nearest Neighbors"] = prob_malade
                 except Exception as e:
                     print(f"Erreur avec KNN: {e}")
-            
-            if dt_available:
-                try:
-                    prob_malade, prob_non_malade = realiser_dt(user_data)
-                    results["Decision Tree"] = prob_malade
-                except Exception as e:
-                    print(f"Erreur avec DT: {e}")
             
             if rf_available:
                 try:
