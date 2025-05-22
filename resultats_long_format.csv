@@ -1,0 +1,29 @@
+modèle,critère,valeur
+KNN,Precision,87.0
+KNN,Accuracy,88.0
+KNN,Recall,88.5
+KNN,F1-Score,88.0
+KNN,Robustesse,66.66666666666666
+KNN,Complexite & Interpretabilité,33.33333333333333
+KNN,Note sur 100,75.0
+Regression Logistique,Precision,86.0
+Regression Logistique,Accuracy,87.0
+Regression Logistique,Recall,87.5
+Regression Logistique,F1-Score,86.5
+Regression Logistique,Robustesse,66.66666666666666
+Regression Logistique,Complexite & Interpretabilité,66.66666666666666
+Regression Logistique,Note sur 100,80.0
+Random Forest,Precision,88.0
+Random Forest,Accuracy,89.0
+Random Forest,Recall,88.5
+Random Forest,F1-Score,88.0
+Random Forest,Robustesse,100.0
+Random Forest,Complexite & Interpretabilité,100.0
+Random Forest,Note sur 100,95.0
+XGBoost,Precision,89.0
+XGBoost,Accuracy,90.0
+XGBoost,Recall,89.0
+XGBoost,F1-Score,89.5
+XGBoost,Robustesse,100.0
+XGBoost,Complexite & Interpretabilité,66.66666666666666
+XGBoost,Note sur 100,90.0

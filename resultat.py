@@ -18,6 +18,7 @@ resultats.loc[3] = ["XGBoost", 89.0, 90.0, 89.0, 89.5, 3,2,4.5]
 
 # Enregistrement dans le fichier CSV
 
-resultats.to_csv("resultat.csv", index=False)
+# Utilisez un chemin absolu
+resultats.to_csv(r"c:\Users\User\OneDrive - Institut Catholique de Lille\Bureau\L3 SDN\S2\Projet Data\Data_project\resultat.csv", index=False)
 
 print("Fichier CSV créé avec succès !")

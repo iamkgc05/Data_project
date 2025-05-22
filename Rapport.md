@@ -188,15 +188,15 @@ Dans ce projet, j'ai employé plusieurs techniques statistiques pour analyser le
 
 #### 1. Prétraitement des données
 
-- **Encodage one-hot**: Transformation des variables catégorielles à plusieurs niveaux (ChestPainType, RestingECG, ST_Slope) en plusieurs colonnes de variables binaires (0/1) pour permettre leur utilisation dans les algorithmes d'apprentissage.
-- **Normalisation des données**: Application de StandardScaler pour standardiser les variables numériques afin qu'elles aient toutes une moyenne de 0 et un écart-type de 1, garantissant ainsi que toutes les caractéristiques contribuent équitablement aux modèles.
-- **Imputation des valeurs manquantes**: Remplacement des valeurs de cholestérol nulles par la médiane des valeurs non nulles pour éviter les biais dans l'analyse.
+- Encodage one-hot: Transformation des variables catégorielles à plusieurs niveaux (ChestPainType, RestingECG, ST_Slope) en plusieurs colonnes de variables binaires (0/1) pour permettre leur utilisation dans les algorithmes d'apprentissage.
+- Normalisation des données: Application de StandardScaler pour standardiser les variables numériques afin qu'elles aient toutes une moyenne de 0 et un écart-type de 1, garantissant ainsi que toutes les caractéristiques contribuent équitablement aux modèles.
+- Imputation des valeurs manquantes: Remplacement des valeurs de cholestérol nulles par la médiane des valeurs non nulles pour éviter les biais dans l'analyse.
 
 #### 2. Techniques d'évaluation des modèles
 
-- **Matrice de confusion**: Analyse détaillée des vrais positifs, faux positifs, vrais négatifs et faux négatifs pour évaluer la qualité des prédictions.
-- **Validation croisée**: Division des données en ensembles d'entraînement (80%) et de test (20%) pour évaluer la capacité de généralisation des modèles.
-- **Métriques de performance**: Utilisation de multiples indicateurs statistiques pour une évaluation complète:
+- Matrice de confusion: Analyse détaillée des vrais positifs, faux positifs, vrais négatifs et faux négatifs pour évaluer la qualité des prédictions.
+- Validation croisée: Division des données en ensembles d'entraînement (80%) et de test (20%) pour évaluer la capacité de généralisation des modèles.
+- Métriques de performance: Utilisation de multiples indicateurs statistiques pour une évaluation complète:
   - Précision
   - Recall/Sensibilité
   - Score F1
@@ -204,9 +204,9 @@ Dans ce projet, j'ai employé plusieurs techniques statistiques pour analyser le
 
 #### 3. Optimisation des hyperparamètres
 
-- **Méthode Elbow** pour KNN: Analyse de l'évolution de l'erreur en fonction du nombre de voisins (k) pour déterminer la valeur optimale.
-- **Grid Search** pour Random Forest: Recherche systématique des meilleurs paramètres (n_estimators=138, max_depth=18) parmi un ensemble de valeurs possibles.
-- **Analyse de courbes d'apprentissage**: Étude de l'évolution des performances en fonction de la taille des données d'entraînement pour détecter d'éventuels problèmes de sur-apprentissage ou sous-apprentissage.
+- Méthode Elbow pour KNN: Analyse de l'évolution de l'erreur en fonction du nombre de voisins (k) pour déterminer la valeur optimale.
+- Grid Search pour Random Forest: Recherche systématique des meilleurs paramètres (n_estimators=123, max_depth=7) parmi un ensemble de valeurs possibles.
+- Analyse de courbes d'apprentissage: Étude de l'évolution des performances en fonction de la taille des données d'entraînement pour détecter d'éventuels problèmes de sur-apprentissage ou sous-apprentissage.
 
 Ces techniques statistiques rigoureuses ont permis non seulement de construire des modèles performants, mais aussi de comprendre en profondeur les facteurs déterminants pour la prédiction des maladies cardiaques et d'assurer la fiabilité des résultats dans un contexte médical où la précision est cruciale.
 
@@ -248,44 +248,39 @@ Dans le contexte de la santé, cette séparation est importante car elle permet 
 
 Pour garantir une évaluation rigoureuse et reproductible de mes modèles prédictifs, j'ai mis en place un protocole d'évaluation structuré en plusieurs étapes :
 
-1. **Préparation et division des données**
+1. Préparation et division des données
 
    - Division du jeu de données en 80% pour l'entraînement et 20% pour le test avec `train_test_split` et un `random_state=42`(si nécessaire) pour assurer la reproductibilité.
    - Application du `StandardScaler` uniquement sur les données d'entraînement, puis utilisation des mêmes paramètres pour normaliser les données de test.
 
-2. **Optimisation des hyperparamètres**
+2. Optimisation des hyperparamètres
 
    - Pour KNN : application de la méthode Elbow pour déterminer le nombre optimal de voisins (k=46)
    - Pour Random Forest : utilisation de `GridSearchCV` pour identifier les meilleurs paramètres (`n_estimators=138`, `max_depth=18`)
    - Pour la Régression Logistique : optimisation du paramètre de régularisation C
    - Pour XGBoost : ajustement du taux d'apprentissage et de la profondeur des arbres
 
-3. **Métriques d'évaluation**
+3. Métriques d'évaluation
 
-   - Calcul systématique de le Précision, l'Exactitude, le Recall et le F1-Score pour chaque modèle :
-     - Précision
-     - Exactitude
-     - Recall
-     - F1-Score
+   - Calcul systématique de le Précision, l'Exactitude, le Recall et le F1-Score pour chaque modèle.
 
-4. **Validation sur cas réels**
+4. Validation sur cas réels
 
    - Test de chaque modèle sur un ensemble de 5 patients tests identiques pour tous les modèles
    - Ces patients ont été choisis pour représenter différents profils : certains clairement malades, d'autres clairement sains, et certains cas limite
    - Analyse des probabilités fournies par chaque modèle, au-delà de la simple classification binaire
 
-5. **Évaluation de la robustesse**
+5. Évaluation de la robustesse
 
    - Test de la sensibilité des modèles à de légères variations dans les données d'entrée
    - Observation de la stabilité des prédictions face à des données légèrement modifiées
    - Analyse de la capacité du modèle à maintenir ses performances sur différents sous-ensembles de données
 
-6. **Analyse de l'interprétabilité**
+6. Analyse de l'interprétabilité
    - Pour la Régression Logistique : examen des coefficients pour identifier les facteurs les plus influents
    - Pour Random Forest et XGBoost : analyse de l'importance des caractéristiques
-   - Évaluation qualitative de la facilité avec laquelle les résultats peuvent être expliqués à un professionnel de santé
 
-Ce protocole rigoureux m'a permis de comparer objectivement les différents modèles et d'identifier lequel offre le meilleur compromis entre performance, robustesse et interprétabilité dans le contexte spécifique de la prédiction des maladies cardiaques.
+Ce protocole m'a permis de comparer objectivement les différents modèles et d'identifier lequel offre le meilleur compromis entre performance, robustesse et interprétabilité dans le contexte spécifique de la prédiction des maladies cardiaques.
 
 ### Tableau Comparatif des modèles
 
@@ -314,16 +309,16 @@ En résumé, bien que XGBoost soit légèrement plus performant, Random Forest e
 
 L'analyse des différents modèles et de leurs résultats permet de tirer plusieurs conclusions originales :
 
-1. **La complémentarité des approches** : La combinaison de plusieurs modèles offre une perspective plus complète qu'un modèle unique, notamment en réduisant le risque de faux négatifs dangereux.
+1. La complémentarité des approches : La combinaison de plusieurs modèles offre une perspective plus complète qu'un modèle unique, notamment en réduisant le risque de faux négatifs dangereux.
 
-2. **L'importance relative des facteurs** : L'analyse des coefficients de la régression logistique et de l'importance des caractéristiques de Random Forest révèle que les facteurs les plus déterminants pour prédire une maladie cardiaque sont, par ordre d'importance :
+2. L'importance relative des facteurs : L'analyse des coefficients de la régression logistique et de l'importance des caractéristiques de Random Forest révèle que les facteurs les plus déterminants pour prédire une maladie cardiaque sont, par ordre d'importance :
 
    - La dépression ST (Oldpeak)
    - La présence de douleurs thoraciques de type ASY (asymptomatiques)
    - L'âge
 
-3. **La mise en perspective clinique** : Ces résultats s'alignent avec la littérature médicale qui souligne que les douleurs thoraciques asymptomatiques sont souvent les plus dangereuses car elles peuvent masquer une pathologie grave sans symptômes évidents.
+3. La mise en perspective clinique : Ces résultats s'alignent avec la littérature médicale qui souligne que les douleurs thoraciques asymptomatiques sont souvent les plus dangereuses car elles peuvent masquer une pathologie grave sans symptômes évidents.
 
-4. **Limites et améliorations possibles** : Malgré de bons résultats, le modèle pourrait bénéficier de données supplémentaires comme l'historique familial de maladies cardiaques ou les habitudes de vie (tabagisme, activité physique) qui ne figurent pas dans le jeu de données actuel.
+4. Limites et améliorations possibles : Malgré de bons résultats, le modèle pourrait bénéficier de données supplémentaires comme l'historique familial de maladies cardiaques ou les habitudes de vie (tabagisme, activité physique) qui ne figurent pas dans le jeu de données actuel.
 
 Ces conclusions démontrent l'utilité potentielle de notre application comme outil d'aide à la décision pour les professionnels de santé, tout en soulignant l'importance de l'interprétation humaine des résultats.
