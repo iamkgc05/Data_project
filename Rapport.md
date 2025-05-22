@@ -1,16 +1,5 @@
 # Rapport du projet de Data IA par OKINDA Carlos Emmanuel
 
-## Plan du Rapport
-
-1. Introduction + Présentation des données et du Nettoyage
-2. Analyse et exploration des données + Visualisation
-3. Presentation des modeles prédictifs
-   - Nom et Justification du choix du modele
-   - Presentation du modele et des resultats obtenus
-   - Evaluation du modèle
-4. Comparaison générale des modeles
-5. Conclusion
-
 ## Introduction
 
 Le but de ce projet est de prédire si un patient est susceptible d'avoir une crise cardiaque ou non.
